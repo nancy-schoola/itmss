@@ -1,56 +1,48 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% block body %}
- <div class="top">
-     <div class="container">
-            <div class="nav">
 
-<!---- menu--->
-                <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">logo</a>
-        </div>
-        <div class="navbar-collapse collapse">
-
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Home</a></li>
-            <li><a href="../navbar-static-top/">ITM Tecnologia</a></li>
-              <li><a href="../navbar/">Rede ITM</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clientes <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">ITM Treinamentos</a></li>
-                <li><a href="#">ITM Eventos</a></li>
-                <li><a href="#">ITM Facility</a></li>
-              </ul>
-            </li>
-            <li class="active"><a href="./">Fixed top</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-
-<!--- menu ---->
-
+    <div class="banner">
+        <!-- Carousel ================================================== -->
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+              {% for slide in slides %}
+              <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
+              {% endfor %}
+          </ol>
+          <div class="carousel-inner container">
+          {% for slide in slides %}
+            <div class="item{% if forloop.first %} active{% endif %}">
+              <img src="{{ slide.imagem.slide.url }}" alt="{{ slide.titulo }}">
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1 class="banner">{{ slide.titulo }}</h1>
+                  <h2>{{ slide.texto|safe }}</h2>
+                  <!--p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p-->
+                </div>
+              </div>
             </div>
-            <div class="banner">banner</div>
+          {% endfor %}
+          </div>
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
-     </div>
-     <hr>
+        <!-- /.carousel -->
+    </div>
+    <hr>
     <div class="container">
         {% for secao in secoes %}
-            <div class="row">
+            <div style="padding-top: 100px" class="row" id="{{ secao.slug }}">
                 <div class="col-xs-12">
                     <h1 class="text-{{ secao.alinhamento }}" style="color: {{ secao.cor }}">{{ secao.titulo }}</h1>
                 </div>
                 {% if secao.alinhamento == 'right' %}
-                <div class="col-xs-6 col-md-2"><img src="{{ secao.imagem.icone.url }}" class="img-responsive"></div>
+                    <div class="col-xs-6 col-md-2"><img src="{{ secao.imagem.icone.url }}" class="img-responsive"></div>
                 {% endif %}
                 <div class="col-xs-6 col-md-10">{{ secao.conteudo|safe }}</div>
                 {% if secao.alinhamento == 'left' %}
-                <div class="col-xs-6 col-md-2"><img src="{{ secao.imagem.icone.url }}" class="img-responsive"></div>
+                    <div class="col-xs-6 col-md-2"><img src="{{ secao.imagem.icone.url }}" class="img-responsive"></div>
                 {% endif %}
             </div>
             {% if not forloop.last %}
@@ -58,41 +50,53 @@
             {% endif %}
         {% endfor %}
     </div>
-<hr>
-<div class="servicos">
-    <div class="container">
+    <hr>
+    <div class="servicos">
+        <div class="container">
             <div class="row">
 
-                <h1 class="servicos">Como Podemos Ajudar?</h1>
-                <p>texto</p>
-                <div class="row">
-                    {% for servico in servicos %}
+                <h1 id="servicos" class="servicos">Como Podemos Ajudar?</h1>
+
+                <p >Conheça a seguir nosso portfólio de produtos e sistemas. Estamos a disposição para simplificar a gestão dos negócios e processos da sua agência.</p>
+                {% for servico in servicos %}
+                    {% if forloop.first or forloop.counter0|divisibleby:4 %}
+                    {% if not forloop.first %}</div>{% endif %}
+                    <div class="row nivelada clearfix">
+                    {% endif %}
                         <div class="col-md-3">
                             <div class="highlight">
-                                <div><img src="{{ servico.imagem.icone.url }}"></div>
-                                <div>{{ servico.conteudo|safe }}</div>
+                                <p class="text-center"><img src="{{ servico.imagem.icone.url }}"></p>
+                                <h3>{{ servico.titulo }}</h3>
+                                <div class="box-serv">{{ servico.intro|safe }}</div>
+                                <br/>
+                                <div><a href="{% url 'servico-detalhe' slug=servico.slug %}" class="btn btn-default">Veja mais</a></div>
                             </div>
                         </div>
+                    {% if forloop.last %}</div>{% endif %}
                     {% endfor %}
-                </div>
             </div>
+        </div>
     </div>
-</div>
-<hr>
-    <div class="container">
-            <div class="row">
-                {% for contato in contatos %}
-                    <br>
-                <div class="col-lg-12">{{ contato.mapa|safe }}</div>
+    <hr>
+    <div class="container" >
+        <div class="row" >
+            {% for contato in contatos %}
+                <br>
+                <div  id="contato" class="col-lg-12">{{ contato.mapa|safe }}</div>
                 <div class="col-md-6 col-xs-12">
-                    <h1>{{ contato.titulo }}</h1>
+                    <h1 class="contato">{{ contato.titulo }}</h1>
                     <br>
+                    <address>
                     <p>{{ contato.endereco }}</p>
+
                     <p>{{ contato.telefone }}</p>
+
                     <p>{{ contato.fax }}</p>
+                    </address>
                 </div>
                 <div class="col-md-6 col-xs-12">
-                    <h1>Contato</h1>
+                    <h1 class="contato">Contato</h1>
+
                     <div>
                         <form action="." class="form">
                             {% csrf_token %}
@@ -105,7 +109,7 @@
                         </form>
                     </div>
                 </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

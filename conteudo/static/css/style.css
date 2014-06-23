@@ -1,9 +1,10 @@
 body{
     background: #f0f3f3;
+    color: #666666;
 }
 .top{
     background: url("../images/top_bg.jpg") repeat;
-    min-height: 650px;
+    /* min-height: 650px; */
 }
 .icone_sobre_itm{
     background: url("../images/icone_sobre_itm.png") no-repeat;
@@ -29,9 +30,13 @@ p.conteudo{
     color: #666666;
     line-height: 40px;
 }
+.serv-conteudo{
+    padding-bottom: 40px;
+}
 h1{
     text-shadow: 0 2px 2px gray;
     font-family: 'Sanchez', serif;
+    color: #1a5e79;
 }
 h1.itmtecnologia{
     color: #0ea4b8;
@@ -43,6 +48,18 @@ h1.servicos{
     color: #fff;
     text-align: center;
 }
+h1.contato{
+    color: #1a5e79;
+    font-size: 25px;
+}
+h1.banner{
+    color: #ffffff;
+    font-size: 48px;
+}
+h3{
+    font-size: 17px;
+    color: #015874;
+}
 .align{
     text-align: right;
 }
@@ -52,4 +69,86 @@ h1.servicos{
     border-radius: 4px;
     margin-bottom: 14px;
     padding: 9px 14px;
+
+}
+.highlight p {
+    line-height: 24px;
+}
+div.conteudo {
+    padding-top: 50px;
+}
+.well{
+    background-color: #ffffff;
+}
+
+.tamanho{
+    width: 150px;
+    height: 150px;
+}
+.page_servicos{
+    margin-top: 50px;
+}
+.banner{
+    margin-top: 100px;
+}
+.box-serv{
+    height: 150px;
+    overflow: hidden;
+}
+.texto-branco{
+    color: #ffffff;
+}
+#contato{
+    padding-top: 130px;
+}
+.portfolio{
+    padding-top: 100px;
+}
+.port-img-top{
+    margin-top: 70px;
+}
+.logo_itm{
+    background: url("../images/Logo-ITM_tecnologia.png") no-repeat ;
+    width: 99px;
+    height: 86px;
+    margin-top: -10px;
+}
+.navbar-fixed-top{
+    height: 100px;
+}
+.navbar-collapse{
+    margin-top: 40px;
+}
+
+.carousel{
+    height: 560px;
+}
+
+footer{
+    background: #dfdfdf;
+    padding-top:20px ;
+}
+.col-md-3 ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    line-height: 30px;
+}
+.col-md-3 ul li{
+    font-family: 'Sanchez', serif;
+}
+ul.submenu li{
+    font-size: 12px;
+    line-height: 20px;
+}
+ul.submenu li link{
+    color: #666666;
+}
+.azul{
+    font-family: 'Sanchez', serif;
+    font-size: 13px;
+    color: #428bca;
+}
+.fa {
+    text-shadow: 0 2px 2px gray;
 }
